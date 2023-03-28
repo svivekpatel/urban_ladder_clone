@@ -5,4 +5,3 @@ const SingleProduct = () => {
 };
 
 export default SingleProduct;
-SingleProduct;

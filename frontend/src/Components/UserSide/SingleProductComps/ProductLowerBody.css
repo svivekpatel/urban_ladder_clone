@@ -1,0 +1,40 @@
+.afterLine::after {
+  content: "";
+  position: absolute;
+  bottom: 38px;
+  border-bottom: 1px solid;
+  opacity: 30%;
+  width: 15%;
+  left: 42%;
+}
+
+.headingAfterLine {
+  font-size: 26px;
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: 1.01px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  position: relative;
+  color: "#2F4858";
+}
+
+.headingAfterLine::after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid #bb2b37;
+  bottom: 15px;
+  width: 80px;
+  left: 46%;
+}
+
+@media screen and (max-width: 500px) {
+  .headingAfterLine::after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid #bb2b37;
+    bottom: 15px;
+    width: 80px;
+    left: 39%;
+  }
+}

@@ -59,30 +59,18 @@ const BottomTabs = () => {
         </TabList>
         <TabPanels>
           <TabPanel fontSize="13px">
-            {tabsList.map((el) => {
-              return (
-                <>
-                  <li>{el}</li>
-                </>
-              );
+            {tabsList.map((el, i) => {
+              return <li key={i}>{el}</li>;
             })}
           </TabPanel>
           <TabPanel fontSize="13px">
-            {tabsList.map((el) => {
-              return (
-                <>
-                  <li>{el}</li>
-                </>
-              );
+            {tabsList.map((el, j) => {
+              return <li key={j}>{el}</li>;
             })}
           </TabPanel>
           <TabPanel fontSize="13px">
-            {tabsList.map((el) => {
-              return (
-                <>
-                  <li>{el}</li>
-                </>
-              );
+            {tabsList.map((el, k) => {
+              return <li key={k}>{el}</li>;
             })}
           </TabPanel>
         </TabPanels>

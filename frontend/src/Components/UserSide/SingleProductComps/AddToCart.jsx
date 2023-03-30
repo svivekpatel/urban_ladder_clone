@@ -1,9 +1,77 @@
-import { Button, Flex, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { useToast, Button, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { BsHeart } from "react-icons/bs";
 import { MdCompare } from "react-icons/md";
+import { BsFillArrowThroughHeartFill } from "react-icons/bs";
+import { ColorForChair, ColorForSofa, ColorForBed } from "./ColorForProducts";
 import WarrantyComp from "./WarrantyComp";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+
 const AddToCart = ({ data, bg }) => {
+  const toast = useToast();
+  const [reload, setReload] = React.useState(false);
+  const { ID } = useParams();
+  const [wishlist, setWishlist] = React.useState(false);
+  const navigate = useNavigate();
+
+  const getWishlistData = async (id) => {
+    try {
+      await axios.get(`http://localhost:3000/wishlist`).then((res) => {
+        res.data.forEach((el) => {
+          if (el.id === +id) {
+            setWishlist(true);
+          }
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getWishlistData(ID);
+  }, [reload]);
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3000/wishlist/${id}`);
+    setWishlist(false);
+    toast({
+      title: `Product removed from wishlist`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+  };
+
+  const handleWishlist = async (id, img, name, price) => {
+    await axios
+      .post("http://localhost:3000/wishlist", {
+        id,
+        productId: Date.now(),
+        img,
+        name,
+        price,
+      })
+      .then(() => {
+        setReload(!reload);
+      });
+    toast({
+      title: `Product Wishlisted`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+  };
+
+  const handleCart = async (uid) => {
+    await axios
+      .post("http://localhost:3000/cart", {
+        id: Date.now(),
+        productId: uid,
+      })
+      .then(() => navigate("/checkout"));
+  };
   return (
     <>
       <Stack m="auto" w={{ base: "100%", sm: "60%", md: "28%" }}>
@@ -12,18 +80,43 @@ const AddToCart = ({ data, bg }) => {
           gap={{ base: "30px", md: "10px" }}
           align={"center"}
         >
-          <Flex cursor={"pointer"} gap={"5px"} align="centers">
-            <BsHeart
-              color={"#b52b37"}
-              fontSize={{ base: "1.3rem", md: "1.1rem" }}
-            />
-            <Text
-              fontSize={{ base: "12px", md: "11px" }}
-              opacity="50%"
-              className="smallText"
-            >
-              Add to Wishlist
-            </Text>
+          <Flex
+            onClick={() =>
+              wishlist
+                ? handleDelete(data.id)
+                : handleWishlist(data.id, data.img, data.name, data.price)
+            }
+            cursor={"pointer"}
+            gap={"5px"}
+            align="centers"
+          >
+            {wishlist ? (
+              <BsFillArrowThroughHeartFill
+                fontSize={{ base: "1.3rem", md: "1.1rem" }}
+                color={"#b52b37"}
+              />
+            ) : (
+              <BsHeart
+                color={"#b52b37"}
+                fontSize={{ base: "1.3rem", md: "1.1rem" }}
+              />
+            )}
+            {wishlist ? (
+              <Text
+                color={"#b52b37"}
+                fontSize={{ base: "12px", md: "11px" }}
+                className="smallText"
+              >
+                Wishlisted
+              </Text>
+            ) : (
+              <Text
+                fontSize={{ base: "12px", md: "11px" }}
+                className="smallText"
+              >
+                Add to Wishlist
+              </Text>
+            )}
           </Flex>
           <Stack height={"30px"} borderLeft={"1px solid"} opacity="50%"></Stack>
           <Flex cursor={"pointer"} gap={"5px"} align="centers">
@@ -31,11 +124,7 @@ const AddToCart = ({ data, bg }) => {
               fontSize={{ base: "1.3rem", md: "1.1rem" }}
               color={"#b52b37"}
             />
-            <Text
-              fontSize={{ base: "12px", md: "11px" }}
-              opacity="50%"
-              className="smallText"
-            >
+            <Text fontSize={{ base: "12px", md: "11px" }} className="smallText">
               Add to Compare
             </Text>
           </Flex>
@@ -52,7 +141,7 @@ const AddToCart = ({ data, bg }) => {
             pos={"absolute"}
             fontWeight="500"
             pl={"6%"}
-            pt={{ base: "3%", sm: "5%", md: "0%", lg: "1%" }}
+            pt={{ base: "3%", sm: "5%", md: "0%", lg: "3%" }}
             color={"navy"}
             fontSize={{ base: "22px", md: "20px" }}
           >
@@ -65,27 +154,21 @@ const AddToCart = ({ data, bg }) => {
 
         {/* ---------color */}
 
-        <Stack>
-          <Text mt={"20px"} fontWeight={"500"}>
-            COLOR
-          </Text>
-
-          <SimpleGrid gap={"5px"} columns={{ base: 3 }}>
-            {/* --------- map colors here */}
-            <Text
-              border="1px solid"
-              borderColor={"#b52b37"}
-              align={"center"}
-              p="4px 6px"
-              bg="#FAFAFA"
-              fontSize={"13px"}
-              color="grey"
-              cursor={"pointer"}
-            >
-              Patchwork
-            </Text>
-          </SimpleGrid>
-        </Stack>
+        {Object.keys(data).length > 0 && data.name.includes("Chair") ? (
+          <ColorForChair />
+        ) : (
+          ""
+        )}
+        {Object.keys(data).length > 0 && data.name.includes("Bed") ? (
+          <ColorForBed />
+        ) : (
+          ""
+        )}
+        {Object.keys(data).length > 0 && data.name.includes("Sofa") ? (
+          <ColorForSofa />
+        ) : (
+          ""
+        )}
 
         {/* ----------- MRP */}
 
@@ -127,6 +210,7 @@ const AddToCart = ({ data, bg }) => {
           letterSpacing={"2px"}
           borderRadius={"0px"}
           color="white"
+          onClick={() => handleCart(data.id)}
           bg={bg}
           _hover={{
             bg: "#b52b37",

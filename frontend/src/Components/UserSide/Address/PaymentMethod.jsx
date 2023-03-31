@@ -48,7 +48,7 @@ const PaymentMethod = () => {
 
                         </Box>
                         <Box display={"flex"} justify={"center"} mt={"5px"}>
-                            <Link align={"start"} as={"u"}><Text as={"u"} color={"teal"}>Change</Text></Link>
+                            <Link align={"start"} as={"u"}><Text as={"u"} color={"#61171d"}>Change</Text></Link>
                         </Box>
 
                     </Box>
@@ -63,7 +63,7 @@ const PaymentMethod = () => {
                         <AccordionItem>
                             <h2 p={"20px"}>
                                 <AccordionButton pt={"15px"} pb={"15px"}>
-                                    <Box as="span" flex='1' textAlign='left' _hover={{ color: "teal" }}>
+                                    <Box as="span" flex='1' textAlign='left' _hover={{ color: "#61171d" }}>
                                         Redeem Gift Card
                                     </Box>
                                     <AccordionIcon />

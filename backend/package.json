@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -19,4 +19,7 @@
     "mongoose": "^7.0.3",
     "nodemon": "^2.0.22"
   }
+=======
+  "description": ""
+>>>>>>> 877eff9c6fa2be13ee8253420dc3687170a74a55
 }

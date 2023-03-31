@@ -1,6 +1,6 @@
 import React from "react";
 import SimpleSlider from "./Carousel";
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import CustomerStory from "../SingleProductComps/CustomerStory";
 import ValueBuy from "./ValueBuy";
 import Popular from "./Popular";

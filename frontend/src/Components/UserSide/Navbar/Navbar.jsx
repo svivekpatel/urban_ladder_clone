@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Assets from "../../../Assets/Furniture.png";
 import {
   Box,
+  Button,
+  FormControl,
+  FormLabel,
   Image,
   Input,
   InputGroup,
   InputRightElement,
   Text,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 const Navbar = () => {
@@ -90,9 +104,23 @@ const Navbar = () => {
           <Text color="#3e3f42">
             <i class="fa-solid fa-truck"></i>
           </Text>
-          <Text>
-            <i class="fa-solid fa-user"></i>
-          </Text>
+          <Menu zIndex={9}>
+            {({ isOpen }) => (
+              <>
+                <MenuButton isActive={isOpen} as={Text} color="#3e3f42">
+                  {isOpen ? (
+                    <i class="fa-solid fa-user"></i>
+                  ) : (
+                    <i class="fa-solid fa-user"></i>
+                  )}
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>{<Login />}</MenuItem>
+                  <MenuItem>{<SignUp />}</MenuItem>
+                </MenuList>
+              </>
+            )}
+          </Menu>
           <Text color="#3e3f42">
             <i class="fa-regular fa-heart"></i>
           </Text>
@@ -104,29 +132,96 @@ const Navbar = () => {
       <Box
         display={{ base: "none", md: "none", xl: "flex", lg: "flex" }}
         position="fixed"
+        // border={"1px solid red"}
         gap={5}
         margin="auto"
         justifyContent="center"
         alignItems="center"
-        top={{ base: "0px", md: "123px", lg: "123px", xl: "123px" }}
+        top={{ lg: "123px", xl: "123px" }}
         right="0"
         left="0"
-        zIndex={2}
+        zIndex={1}
         textAlign="center"
         borderBottom="1px solid #D8D8D8 "
         backgroundColor="#fff"
       >
-        <Text>Deal Zone</Text>
-        <Text>Sofas & Recliners</Text>
-        <Text>Living</Text>
-        <Text>Bedroom & Mattresses</Text>
-        <Text>Dining</Text>
-        <Text>Storage</Text>
-        <Text>Study</Text>
-        <Text>Lighting & Decor</Text>
-        <Text>Outdoor</Text>
-        <Text>Interiors</Text>
-        <Text>Trending</Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Deal Zone
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Sofas & Recliners
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Living
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Bedroom & Mattresses
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Dining
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Storage
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Study
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Lighting & Decor
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Outdoor
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Interiors
+        </Text>
+        <Text
+          fontFamily={"serif"}
+          fontWeight={"100"}
+          _hover={{ color: "#CE5959", cursor: "pointer" }}
+        >
+          Trending
+        </Text>
       </Box>
     </Box>
   );
@@ -148,5 +243,145 @@ function SearchInput() {
         </Box>
       </InputRightElement>
     </InputGroup>
+  );
+}
+
+function Login() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [userName, setuserName] = useState("");
+  const [password, Setpassword] = useState("");
+  const handleLogin = () => {
+    const payload = {
+      userName,
+      password,
+    };
+    console.log(payload);
+    onClose();
+  };
+
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+
+  return (
+    <>
+      <Button width={"100%"} onClick={onOpen}>
+        Login
+      </Button>
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Log In</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>User name</FormLabel>
+              <Input
+                ref={initialRef}
+                placeholder="User Name"
+                value={userName}
+                onChange={(e) => {
+                  setuserName(e.target.value);
+                }}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  Setpassword(e.target.value);
+                }}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button onClick={handleLogin} colorScheme="blue" mr={3}>
+              Log In
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+
+function SignUp() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [userName, setuserName] = useState("");
+  const [password, Setpassword] = useState("");
+  const handleLogin = () => {
+    const payload = {
+      userName,
+      password,
+    };
+    console.log(payload);
+    onClose();
+  };
+
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+
+  return (
+    <>
+      <Button width={"100%"} onClick={onOpen}>
+        Sign Up
+      </Button>
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Sign Up</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>User name</FormLabel>
+              <Input
+                ref={initialRef}
+                placeholder="User Name"
+                value={userName}
+                onChange={(e) => {
+                  setuserName(e.target.value);
+                }}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  Setpassword(e.target.value);
+                }}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button onClick={handleLogin} colorScheme="blue" mr={3}>
+              Sign Up
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }

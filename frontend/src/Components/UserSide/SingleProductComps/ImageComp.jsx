@@ -1,12 +1,11 @@
 import { Flex, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import "./imageComp.css";
 
 const ImageComp = ({ data, bg }) => {
   return (
     <>
-      <Stack pos={"relative"}>
+      <Stack w={{ base: "98%", sm: "98%", md: "72%" }} pos={"relative"}>
         <Text
           whiteSpace={"nowrap"}
           overflow={"hidden"}
@@ -17,7 +16,7 @@ const ImageComp = ({ data, bg }) => {
           {" "}
           {data.name}
         </Text>
-        <Stack pb={"20px"} w="100%">
+        <Stack pb={"20px"} w="95%">
           <Image src={data.img} />
         </Stack>
         <Text fontSize={"14px"} color={"#b52b37"}>
@@ -26,21 +25,21 @@ const ImageComp = ({ data, bg }) => {
         <SimpleGrid w={"95%"} columns={{ base: 1, lg: 2 }}>
           <Flex gap={"5px"}>
             <Text className="product-details">● Net Quantity:</Text>
-            <Text className="product-details-value">{data.quantity} N</Text>
+            <Text className="product-details-value">1 N</Text>
           </Flex>
           <Flex gap={"5px"}>
             <Text className="product-details">● Product Dimensions:</Text>
-            <Text className="product-details-value">{data.dimensions}</Text>
+            <Text className="product-details-value">
+              81.0 cm x 47.0 cm x 52.0 cm
+            </Text>
           </Flex>
           <Flex gap={"5px"}>
             <Text className="product-details">● Country of Origin:</Text>
-            <Text className="product-details-value">{data.country}</Text>
+            <Text className="product-details-value">India</Text>
           </Flex>
           <Flex gap={"5px"}>
             <Text className="product-details">● Package Contains:</Text>
-            <Text className="product-details-value">
-              {data.quantity} {data.category}
-            </Text>
+            <Text className="product-details-value">1 {data.category}</Text>
           </Flex>
         </SimpleGrid>
         <Text className="MoreInfo" fontSize={"14px"} color={"#b52b37"}>

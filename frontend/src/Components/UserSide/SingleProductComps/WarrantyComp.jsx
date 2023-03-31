@@ -7,6 +7,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -24,10 +25,20 @@ import {
 } from "@chakra-ui/react";
 
 const WarrantyComp = ({ data, bg }) => {
+  const toast = useToast();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [location, setLocation] = React.useState("Bangalore");
-  const [pincode, setPincode] = React.useState("560001");
+  let addressValue = JSON.parse(localStorage.getItem("address")) || {
+    location: "",
+    pincode: "",
+  };
+  const [location, setLocation] = React.useState(
+    addressValue.location.length > 0 ? addressValue.location : "Bangalore"
+  );
+  const [pincode, setPincode] = React.useState(
+    addressValue.pincode.length > 0 ? addressValue.pincode : "560001"
+  );
 
   const [currentDate, setCurrentDate] = React.useState("");
   const [currentMonth, setCurrentMonth] = React.useState("");
@@ -59,6 +70,19 @@ const WarrantyComp = ({ data, bg }) => {
   }, []);
 
   const submitAddress = () => {
+    if (location.length < 3) {
+      return toast({
+        title: `Enter a Valid Location`,
+        position: "top",
+        isClosable: true,
+      });
+    } else if (pincode.length < 6) {
+      return toast({
+        title: `Enter a Valid pincode`,
+        position: "top",
+        isClosable: true,
+      });
+    }
     let d = new Date().toString();
     let date = new Date(d);
     d = d.split(" ");
@@ -79,9 +103,16 @@ const WarrantyComp = ({ data, bg }) => {
 
     setNewDate(() => newCurrentDateValue);
     setNewMonth(() => newCurrentMonthValue);
-  };
-  const changeAddress = () => {
-    submitAddress();
+
+    localStorage.setItem("address", JSON.stringify({ location, pincode }));
+
+    onClose();
+    toast({
+      title: `Location Updated`,
+      position: "top",
+      isClosable: true,
+      status: "success",
+    });
   };
 
   return (
@@ -253,13 +284,13 @@ const AddressModal = ({
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Change Your Address
+            Enter Your Delivery Location
           </AlertDialogHeader>
 
           <AlertDialogBody>
             <Input
+              mb={"10px"}
               value={location}
-              required
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
@@ -267,7 +298,6 @@ const AddressModal = ({
               type="text"
             />
             <Input
-              required
               value={pincode}
               placeholder="Pincode"
               onChange={(e) => {
@@ -282,7 +312,6 @@ const AddressModal = ({
             <Button
               colorScheme="red"
               onClick={() => {
-                onClose();
                 submitAddress();
               }}
               ml={3}

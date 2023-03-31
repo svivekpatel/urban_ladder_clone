@@ -7,8 +7,10 @@ import ProductDimensionForChair from "./ProductDimensionForChair";
 import SimilarProducts from "./SimilarProducts";
 import PopularAcrossSite from "./PopularAcrossSite";
 import CustomerStory from "./CustomerStory";
+import ProductDimensionForSofa from "./ProductDimensionForSofa";
+import ProductDimensionForBed from "./ProductDimensionForBed";
 
-const ProductLowerBody = () => {
+const ProductLowerBody = ({ data }) => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -19,7 +21,24 @@ const ProductLowerBody = () => {
         p={{ base: "10px", md: 0 }}
       >
         <FreeHomeDelivery />
-        <ProductDimensionForChair />
+        {Object.keys(data).length > 0 && data.name.includes("Chair") ? (
+          <ProductDimensionForChair />
+        ) : (
+          ""
+        )}
+
+        {Object.keys(data).length > 0 && data.name.includes("Sofa") ? (
+          <ProductDimensionForSofa />
+        ) : (
+          ""
+        )}
+
+        {Object.keys(data).length > 0 && data.name.includes("Bed") ? (
+          <ProductDimensionForBed />
+        ) : (
+          ""
+        )}
+
         {isDesktop ? <BottomTabs /> : <BottomAccordion />}
         <SimilarProducts />
         <PopularAcrossSite />

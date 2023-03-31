@@ -44,9 +44,9 @@ const BottomAccordion = () => {
   return (
     <>
       <Accordion pt={"60px"} allowToggle>
-        {accordionTitle.map((el) => {
+        {accordionTitle.map((el, ind) => {
           return (
-            <AccordionItem>
+            <AccordionItem key={ind}>
               <h2>
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
@@ -57,8 +57,8 @@ const BottomAccordion = () => {
               </h2>
               <AccordionPanel pb={4}>
                 <ul style={{ fontSize: "14px" }}>
-                  {accordionList.map((i) => {
-                    return <li>{i}</li>;
+                  {accordionList.map((i, inds) => {
+                    return <li key={inds}>{i}</li>;
                   })}
                 </ul>
               </AccordionPanel>

@@ -2,20 +2,10 @@ import { Divider, Flex, Stack } from "@chakra-ui/react";
 import React from "react";
 import ImageComp from "./ImageComp";
 import AddToCart from "./AddToCart";
-import axios from "axios";
 
-const ProductUpperBody = () => {
-  const [data, setData] = React.useState([]);
-  const [data2, setData2] = React.useState([]);
-
+const ProductUpperBody = ({ data }) => {
   const bg = "#61171d";
-  React.useEffect(() => {
-    axios.get("http://localhost:3000/data").then((res) => {
-      setData(res.data[1]);
-      setData2(res.data);
-    });
-  }, []);
-  console.log(data);
+
   return (
     <>
       <Stack

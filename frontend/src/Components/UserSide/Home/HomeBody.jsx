@@ -3,6 +3,7 @@ import SimpleSlider from "./Carousel";
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import CustomerStory from "../SingleProductComps/CustomerStory";
 import ValueBuy from "./ValueBuy";
+import Popular from "./Popular";
 
 //color to use #61171d
 
@@ -212,6 +213,11 @@ const HomeBody = () => {
       <Box>
         <Text className="headingAfterLine">Value Buys In Furniture</Text>
         <ValueBuy />
+      </Box>
+
+      <Box>
+        <Text className="headingAfterLine">Popular Across Site</Text>
+        <Popular />
       </Box>
       <Box
         // border={"1px solid red"}

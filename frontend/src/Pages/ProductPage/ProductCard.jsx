@@ -3,13 +3,11 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 // import { BiHeart } from "react-icons/bi";
 import { Image } from "@chakra-ui/react";
 
-const ProductCard = ({image,title,price,description,category}) => {
-
+const ProductCard = ({ image, title, price, description, category }) => {
   return (
     <Box
       bg="white"
       cursor="pointer"
-      
       p="6"
       rounded="md"
       _hover={{ boxShadow: "md", transition: "box-shadow 0.2s ease-in-out" }}
@@ -29,22 +27,17 @@ const ProductCard = ({image,title,price,description,category}) => {
         </Flex>
       </Box>
       <Box mt={7}>
-        <Image
-          src={image}
-          alt="pic"
-          w="100%"
-          h="250px"
-        />
+        <Image src={image} alt="pic" w="100%" h="250px" />
       </Box>
       <Text textAlign="center">{description}</Text>
       <Text textAlign="center" color="teal">
-         {title}
+        {title}
       </Text>
       <Text textAlign="center" color="teal">
         {category}
       </Text>
       <Text textAlign="center" color="teal">
-      ₹{price}
+        ₹{price}
       </Text>
       <Button
         bg="red"

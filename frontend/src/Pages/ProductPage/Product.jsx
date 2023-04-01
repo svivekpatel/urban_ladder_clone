@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Box,
@@ -13,28 +13,31 @@ import {
   RadioGroup,
   Radio,
   Grid,
-  GridItem
+  GridItem,
 } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import ShowlessMore from "./ShowlessMore";
 import ProductCard from "./ProductCard";
 
-
 const Product = () => {
   const [button, setButton] = useState(null);
-  const[data,setData]=useState([]);
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-      axios.get(`https://fakestoreapi.com/products`)
-      .then((res)=> {
-        console.log(res.data);
-        setData(res.data);
-      })
-  },[])
+  useEffect(() => {
+    axios.get(`https://fakestoreapi.com/products`).then((res) => {
+      console.log(res.data);
+      setData(res.data);
+    });
+  }, []);
 
   return (
     <Box>
-      <Box w="70%" display={"block"} m={"auto"} mt={8}>
+      <Box
+        w="70%"
+        display={"block"}
+        m={"auto"}
+        mt={{ base: "7rem", md: "10rem" }}
+      >
         <Heading size="xl" textAlign={"center"} color="teal">
           All Sofas
         </Heading>
@@ -95,29 +98,19 @@ const Product = () => {
                     </Text>
                     <RadioGroup ml={5} mt={5}>
                       <Stack spacing={30} direction="row">
-                        <Radio colorScheme="blue" >
-                          ₹8961-₹51228
-                        </Radio>
-                        <Radio colorScheme="blue" >
-                          ₹51229-₹93495
-                        </Radio>
+                        <Radio colorScheme="blue">₹8961-₹51228</Radio>
+                        <Radio colorScheme="blue">₹51229-₹93495</Radio>
                       </Stack>
                     </RadioGroup>
                     <RadioGroup ml={5} mt={5}>
                       <Stack spacing={30} direction="row">
-                        <Radio colorScheme="blue" >
-                          ₹93496-₹135,762
-                        </Radio>
-                        <Radio colorScheme="blue" >
-                          ₹135,763-₹178,029
-                        </Radio>
+                        <Radio colorScheme="blue">₹93496-₹135,762</Radio>
+                        <Radio colorScheme="blue">₹135,763-₹178,029</Radio>
                       </Stack>
                     </RadioGroup>
                     <RadioGroup ml={5} mt={5}>
                       <Stack spacing={30} direction="row">
-                        <Radio colorScheme="blue" >
-                          ₹178,030-₹220,300
-                        </Radio>
+                        <Radio colorScheme="blue">₹178,030-₹220,300</Radio>
                       </Stack>
                     </RadioGroup>
                   </Box>
@@ -361,13 +354,13 @@ const Product = () => {
           </Flex>
         </Box>
       </Box>
-       <Grid templateColumns="repeat(3, 1fr)" gap={6} w="80%" m="auto" mt={4}>
-         {data.map((item) => (
-            <GridItem key={item.id}>
-               <ProductCard {...item} />
-            </GridItem>
-           ))}
-       </Grid>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6} w="80%" m="auto" mt={4}>
+        {data.map((item) => (
+          <GridItem key={item.id}>
+            <ProductCard {...item} />
+          </GridItem>
+        ))}
+      </Grid>
     </Box>
   );
 };

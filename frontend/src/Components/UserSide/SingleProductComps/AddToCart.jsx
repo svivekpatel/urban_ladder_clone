@@ -38,7 +38,7 @@ const AddToCart = ({ data, bg }) => {
     setWishlist(false);
     toast({
       title: `Product removed from wishlist`,
-      position: "top",
+      position: "bottom",
       status: "success",
       isClosable: true,
     });
@@ -58,7 +58,7 @@ const AddToCart = ({ data, bg }) => {
       });
     toast({
       title: `Product Wishlisted`,
-      position: "top",
+      position: "bottom",
       status: "success",
       isClosable: true,
     });

@@ -1,8 +1,7 @@
 import React from "react";
 import { Stack } from "@chakra-ui/react";
-import { Text, Flex, Image } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const WishlistEmpty = () => {
@@ -13,10 +12,11 @@ const WishlistEmpty = () => {
   return (
     <>
       <Stack
-        h={"60rem"}
+        h={{ base: "30rem", md: "60rem" }}
         textAlign={"center"}
         width={{ base: "97%", md: "70%" }}
-        m="auto"
+        m={"auto"}
+        pt={{ base: "100px", md: "150px" }}
       >
         <Stack top="15%" position={"relative"}>
           <Text
@@ -32,21 +32,7 @@ const WishlistEmpty = () => {
             Oops! There are no items in your wishlist. Continue browsing and add
             some!
           </Text>
-          <Stack left={{ base: "35%" }} position={"relative"} w={"30%"}>
-            <motion.div
-              whileHover={{
-                scale: 1.1,
-                rotate: [-10, 0, 10, 0, -10, 0, 10, 0, -10, 0, 10, 0],
-              }}
-              whileTap={{
-                scale: 0.8,
-                rotate: [-10, 0, 10, 0],
-                borderRadius: "100%",
-              }}
-            >
-              <Image src="https://media0.giphy.com/media/E09MRfFAJ5qwFXX8Aq/giphy.gif?cid=ecf05e47xojctpys7nwrdwrncoxq57wlxat5332al24az1pw&rid=giphy.gif&ct=s" />
-            </motion.div>
-          </Stack>
+
           <Flex pt="30px" justify={"center"}>
             <Button
               onClick={() => handleBrowsing()}

@@ -73,13 +73,13 @@ const WarrantyComp = ({ data, bg }) => {
     if (location.length < 3) {
       return toast({
         title: `Enter a Valid Location`,
-        position: "top",
+        position: "bottom",
         isClosable: true,
       });
     } else if (pincode.length < 6) {
       return toast({
         title: `Enter a Valid pincode`,
-        position: "top",
+        position: "bottom",
         isClosable: true,
       });
     }
@@ -109,7 +109,7 @@ const WarrantyComp = ({ data, bg }) => {
     onClose();
     toast({
       title: `Location Updated`,
-      position: "top",
+      position: "bottom",
       isClosable: true,
       status: "success",
     });

@@ -11,6 +11,9 @@ const WishlistWithProducts = ({ data, setReload, reload }) => {
   return (
     <>
       <Text
+        pt={{ base: "130px", md: "180px" }}
+        pb={{ base: "30px" }}
+        m="auto"
         align={"center"}
         fontFamily={"serif"}
         color="navy"

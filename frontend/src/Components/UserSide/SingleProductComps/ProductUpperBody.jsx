@@ -9,7 +9,7 @@ const ProductUpperBody = ({ data }) => {
   return (
     <>
       <Stack
-        m={"auto"}
+        m={"180px auto auto auto"}
         w={{ base: "98%", md: "90%", lg: "75%" }}
         p={{ base: "10px", md: 0 }}
       >

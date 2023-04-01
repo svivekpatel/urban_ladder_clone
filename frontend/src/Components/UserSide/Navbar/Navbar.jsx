@@ -23,7 +23,15 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const visit = (location) => {
+    return navigate(location);
+  };
+
   return (
     <Box>
       <Box
@@ -36,14 +44,17 @@ const Navbar = () => {
         top="0"
         left="0"
         right="0"
-        zIndex={2}
+        zIndex={9999999999}
       >
         <Text
           align="center"
           fontSize={{ base: "10px", md: "12px", lg: "14px" }}
         >
           Set The Scene | Up to 50% off |{" "}
-          <span style={{ color: "red", fontWeight: "500" }}>
+          <span
+            onClick={() => visit("/product")}
+            style={{ color: "red", fontWeight: "500" }}
+          >
             Click to shop!
           </span>
         </Text>
@@ -60,7 +71,7 @@ const Navbar = () => {
         top="8"
         left="0"
         right="0"
-        zIndex={2}
+        zIndex={99999}
       >
         <Box display="flex" gap="5">
           <Text>Help</Text>
@@ -86,7 +97,7 @@ const Navbar = () => {
         paddingTop="10px"
         paddingBottom="10px"
         borderBottom="1px solid #D8D8D8 "
-        zIndex={2}
+        zIndex={99999}
       >
         <Box>
           <Image width={"170px"} height="100%" src={Assets} alt="#" />
@@ -104,10 +115,15 @@ const Navbar = () => {
           <Text color="#3e3f42">
             <i class="fa-solid fa-truck"></i>
           </Text>
-          <Menu zIndex={9}>
+          <Menu zIndex={9998}>
             {({ isOpen }) => (
               <>
-                <MenuButton isActive={isOpen} as={Text} color="#3e3f42">
+                <MenuButton
+                  cursor={"pointer"}
+                  isActive={isOpen}
+                  as={Text}
+                  color="#3e3f42"
+                >
                   {isOpen ? (
                     <i class="fa-solid fa-user"></i>
                   ) : (
@@ -121,10 +137,18 @@ const Navbar = () => {
               </>
             )}
           </Menu>
-          <Text color="#3e3f42">
+          <Text
+            cursor={"pointer"}
+            onClick={() => visit("/wishlist")}
+            color="#3e3f42"
+          >
             <i class="fa-regular fa-heart"></i>
           </Text>
-          <Text color="#3e3f42">
+          <Text
+            cursor={"pointer"}
+            onClick={() => visit("/checkout")}
+            color="#3e3f42"
+          >
             <i class="fa-solid fa-cart-shopping"></i>
           </Text>
         </Box>
@@ -140,19 +164,23 @@ const Navbar = () => {
         top={{ lg: "123px", xl: "123px" }}
         right="0"
         left="0"
-        zIndex={1}
+        zIndex={9999}
         textAlign="center"
         borderBottom="1px solid #D8D8D8 "
         backgroundColor="#fff"
       >
         <Text
           fontFamily={"serif"}
+          cursor={"pointer"}
+          onClick={() => visit("/product")}
           fontWeight={"100"}
           _hover={{ color: "#CE5959", cursor: "pointer" }}
         >
           Deal Zone
         </Text>
         <Text
+          cursor={"pointer"}
+          onClick={() => visit("/product")}
           fontFamily={"serif"}
           fontWeight={"100"}
           _hover={{ color: "#CE5959", cursor: "pointer" }}
@@ -160,6 +188,8 @@ const Navbar = () => {
           Sofas & Recliners
         </Text>
         <Text
+          cursor={"pointer"}
+          onClick={() => visit("/product")}
           fontFamily={"serif"}
           fontWeight={"100"}
           _hover={{ color: "#CE5959", cursor: "pointer" }}
@@ -167,6 +197,8 @@ const Navbar = () => {
           Living
         </Text>
         <Text
+          cursor={"pointer"}
+          onClick={() => visit("/product")}
           fontFamily={"serif"}
           fontWeight={"100"}
           _hover={{ color: "#CE5959", cursor: "pointer" }}

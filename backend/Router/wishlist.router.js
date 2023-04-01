@@ -16,7 +16,7 @@ wishListRouter.get('/', async (req, res) => {
     }
 })
 
-wishListRouter.patch('/add', async (req, res) => {
+wishListRouter.post('/addtowishlist', async (req, res) => {
     const payload = req.body;
 
     try {

@@ -10,48 +10,16 @@ import axios from "axios";
 
 function CartProducts() {
 
-    const cartData =  [
-        {
-          "image": "https://example.com/furniture/bookshelf1.jpg",
-          "title": "Modern Armchair",
-          "brand": "Acme Furniture",
-          "price": 299.99
-        },
-        {
-          "image": "https://example.com/furniture/bookshelf1.jpg",
-          "title": "Leather Sofa",
-          "brand": "Ashley Furniture",
-          "price": 1299.99
-        },
-        {
-          "image": "https://example.com/furniture/bookshelf1.jpg",
-          "title": "Dining Table",
-          "brand": "IKEA",
-          "price": 499.99
-        },
-        {
-          "image": "https://example.com/furniture/bookshelf1.jpg",
-          "title": "Queen Size Bed",
-          "brand": "Simmons",
-          "price": 899.99
-        },
-        {
-          "image": "https://example.com/furniture/bookshelf1.jpg",
-          "title": "Bookshelf",
-          "brand": "Wayfair",
-          "price": 249.99
-        }
-      ]
+
 
 
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        // axios.get("https://lime-tough-coati.cyclic.app/").then((response) => {
-        //     setCartItems(response.data);
-        //     console.log(response.data)
-        // });
-        setCartItems(cartData)
+        axios.get("https://lime-tough-coati.cyclic.app/cart").then((response) => {
+            setCartItems(response.data);
+            console.log(response.data)
+        });
     }, []);
 
     const handleQuantityChange = (itemIndex, event) => {
@@ -65,7 +33,7 @@ function CartProducts() {
         const newCartItems = [...cartItems];
         newCartItems.splice(itemIndex, 1);
         setCartItems(newCartItems);
-        axios.delete(``);
+        axios.delete(`https://lime-tough-coati.cyclic.app/cart/deletecart/${_id}`);
     }
 
 

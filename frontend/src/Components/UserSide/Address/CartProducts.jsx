@@ -10,14 +10,48 @@ import axios from "axios";
 
 function CartProducts() {
 
+    const cartData =  [
+        {
+          "image": "https://example.com/furniture/bookshelf1.jpg",
+          "title": "Modern Armchair",
+          "brand": "Acme Furniture",
+          "price": 299.99
+        },
+        {
+          "image": "https://example.com/furniture/bookshelf1.jpg",
+          "title": "Leather Sofa",
+          "brand": "Ashley Furniture",
+          "price": 1299.99
+        },
+        {
+          "image": "https://example.com/furniture/bookshelf1.jpg",
+          "title": "Dining Table",
+          "brand": "IKEA",
+          "price": 499.99
+        },
+        {
+          "image": "https://example.com/furniture/bookshelf1.jpg",
+          "title": "Queen Size Bed",
+          "brand": "Simmons",
+          "price": 899.99
+        },
+        {
+          "image": "https://example.com/furniture/bookshelf1.jpg",
+          "title": "Bookshelf",
+          "brand": "Wayfair",
+          "price": 249.99
+        }
+      ]
 
 
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        axios.get("").then((response) => {
-            setCartItems(response.data);
-        });
+        // axios.get("https://lime-tough-coati.cyclic.app/").then((response) => {
+        //     setCartItems(response.data);
+        //     console.log(response.data)
+        // });
+        setCartItems(cartData)
     }, []);
 
     const handleQuantityChange = (itemIndex, event) => {
@@ -48,7 +82,7 @@ function CartProducts() {
 
 
             {
-                cartItems.length<0 ? <Box>
+                cartItems ? <Box>
                     <Table>
                         <Thead>
                             <Tr>
@@ -63,12 +97,12 @@ function CartProducts() {
                             {cartItems.map((item, index) => (
                                 <Tr key={index}>
                                     <Td display="flex" alignItems="center">
-                                        <Image src={item.image[0]} alt={item.name} w={"100px"} mr={4} />
+                                        <Image src={item.image} alt={item.title} w={"100px"} mr={4} />
                                         <Box>
-                                            <Text fontWeight="bold">{item.name}</Text>
+                                            <Text fontWeight="bold">{item.title}</Text>
                                         </Box>
                                     </Td>
-                                    <Td>${item.price}</Td>
+                                    <Td>₹{item.price}</Td>
                                     <Td>
                                         <Select
                                             value={item.quantity}
@@ -81,7 +115,7 @@ function CartProducts() {
                                             ))}
                                         </Select>
                                     </Td>
-                                    <Td>${item.price * (item.quantity || 1)}</Td>
+                                    <Td>₹{item.price * (item.quantity || 1)}</Td>
                                     <Td>
                                         <Button
                                             color="#61171d"

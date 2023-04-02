@@ -2,6 +2,9 @@
 
 import Footer from './Components/UserSide/Footer/Footer';
 import Navbar from './Components/UserSide/Navbar/Navbar';
+import Address from './Pages/AddressPage/Address';
+import Cart from './Pages/AddressPage/Cart';
+import Payment from './Pages/AddressPage/Payment';
 import AllRoutes from './Routes/AllRoutes';
 
 function App() {
@@ -10,7 +13,10 @@ function App() {
 
       {/* <Product/> */}
       <Navbar />
-      <AllRoutes />
+      {/* <AllRoutes /> */}
+      <Cart/>
+      <Address/>
+      <Payment/>
       <Footer />
     </div >
   );

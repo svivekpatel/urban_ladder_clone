@@ -6,7 +6,6 @@ const cartSchema = mongoose.Schema({
     price: Number,
     brand: String,
     userID: String
-
 }, {
     versionKey: false
 })

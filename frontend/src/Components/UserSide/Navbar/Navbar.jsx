@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Assets from "../../../Assets/Furniture.png";
 import {
   Box,
@@ -11,6 +12,7 @@ import {
   InputRightElement,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import {
@@ -23,9 +25,18 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigationType } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setAdminLogin }) => {
+  const [loginState, setLoginState] = useState(true);
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLoginState(false);
+    } else {
+      setLoginState(true);
+    }
+  }, []);
   const navigate = useNavigate();
 
   const visit = (location) => {
@@ -131,7 +142,17 @@ const Navbar = () => {
                   )}
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>{<Login />}</MenuItem>
+                  <MenuItem>
+                    {loginState ? (
+                      <Login
+                        setAdminLogin={setAdminLogin}
+                        setLoginState={setLoginState}
+                        loginState={loginState}
+                      />
+                    ) : (
+                      <Logout setLoginState={setLoginState} />
+                    )}
+                  </MenuItem>
                   <MenuItem>{<SignUp />}</MenuItem>
                 </MenuList>
               </>
@@ -278,17 +299,44 @@ function SearchInput() {
   );
 }
 
-function Login() {
+function Login({ setLoginState, setAdminLogin }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const toast = useToast();
   const [userName, setuserName] = useState("");
   const [password, Setpassword] = useState("");
+
+  const navigate = useNavigate();
+
   const handleLogin = () => {
     const payload = {
-      userName,
+      email: userName,
       password,
     };
-    console.log(payload);
+
+    if (userName == "admin@furniture.com" && password == "admin") {
+      onClose();
+      setAdminLogin(true);
+      return navigate("/admin");
+    }
+
+    axios
+      .post("https://lime-tough-coati.cyclic.app/users/login", payload)
+      .then((res) => {
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        localStorage.setItem("token", res.data.token);
+        setLoginState(false);
+      })
+      .catch((err) => {
+        toast({
+          title: "Check your credentials",
+          status: "error",
+          isClosable: true,
+        });
+      });
     onClose();
   };
 
@@ -307,15 +355,16 @@ function Login() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent pos={"absolute"} top="25%">
           <ModalHeader>Log In</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>User name</FormLabel>
+              <FormLabel>Email</FormLabel>
               <Input
                 ref={initialRef}
-                placeholder="User Name"
+                placeholder="Email"
+                type={"email"}
                 value={userName}
                 onChange={(e) => {
                   setuserName(e.target.value);
@@ -348,17 +397,54 @@ function Login() {
   );
 }
 
+function Logout({ loginState, setLoginState }) {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setLoginState(true);
+  };
+
+  return (
+    <>
+      <Button width={"100%"} onClick={() => handleLogout()}>
+        Logout
+      </Button>
+    </>
+  );
+}
+
 function SignUp() {
+  const toast = useToast();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [userName, setuserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, Setpassword] = useState("");
-  const handleLogin = () => {
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     const payload = {
-      userName,
+      Name: userName,
+      email,
       password,
     };
-    console.log(payload);
+    await axios
+      .post("https://lime-tough-coati.cyclic.app/users/register", payload)
+      .then((res) => {
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "User already exists",
+          status: "error",
+          isClosable: true,
+        });
+      });
     onClose();
   };
 
@@ -377,7 +463,7 @@ function SignUp() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent pos={"absolute"} top="25%">
           <ModalHeader>Sign Up</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
@@ -389,6 +475,18 @@ function SignUp() {
                 value={userName}
                 onChange={(e) => {
                   setuserName(e.target.value);
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                ref={initialRef}
+                placeholder="Email"
+                value={email}
+                type="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
                 }}
               />
             </FormControl>
@@ -407,7 +505,7 @@ function SignUp() {
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={handleLogin} colorScheme="blue" mr={3}>
+            <Button onClick={(e) => handleLogin(e)} colorScheme="blue" mr={3}>
               Sign Up
             </Button>
             <Button onClick={onClose}>Cancel</Button>

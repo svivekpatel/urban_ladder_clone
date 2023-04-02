@@ -1,18 +1,20 @@
+import React from "react";
 
-
-import Footer from './Components/UserSide/Footer/Footer';
-import Navbar from './Components/UserSide/Navbar/Navbar';
-import AllRoutes from './Routes/AllRoutes';
+import Footer from "./Components/UserSide/Footer/Footer";
+import Navbar from "./Components/UserSide/Navbar/Navbar";
+import AllRoutes from "./Routes/AllRoutes";
 
 function App() {
+  const [adminLogin, setAdminLogin] = React.useState(false);
+
   return (
     <div className="App">
-
       {/* <Product/> */}
-      <Navbar />
+      {adminLogin ? "" : <Navbar setAdminLogin={setAdminLogin} />}
       <AllRoutes />
-      <Footer />
-    </div >
+
+      {adminLogin ? "" : <Footer />}
+    </div>
   );
 }
 

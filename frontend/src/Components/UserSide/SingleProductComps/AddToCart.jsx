@@ -46,13 +46,21 @@ const AddToCart = ({ data, bg }) => {
 
   const handleWishlist = async (id, img, name, price) => {
     await axios
-      .post("http://localhost:3000/wishlist", {
-        id,
-        productId: Date.now(),
-        img,
-        name,
-        price,
-      })
+      .post(
+        "https://lime-tough-coati.cyclic.app/wishlist",
+        {
+          id,
+          productId: Date.now(),
+          img,
+          name,
+          price,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() => {
         setReload(!reload);
       });
@@ -66,10 +74,18 @@ const AddToCart = ({ data, bg }) => {
 
   const handleCart = async (uid) => {
     await axios
-      .post("http://localhost:3000/cart", {
-        id: Date.now(),
-        productId: uid,
-      })
+      .post(
+        "https://lime-tough-coati.cyclic.app/cart",
+        {
+          id: Date.now(),
+          productId: uid,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() => navigate("/checkout"));
   };
   return (

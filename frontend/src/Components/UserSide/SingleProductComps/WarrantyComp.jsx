@@ -276,12 +276,8 @@ const AddressModal = ({
   setPincode,
 }) => {
   return (
-    <AlertDialog
-      isOpen={isOpen}
-      // leastDestructiveRef={cancelRef}
-      onClose={onClose}
-    >
-      <AlertDialogOverlay>
+    <AlertDialog isOpen={isOpen} onClose={onClose}>
+      <AlertDialogOverlay zIndex={999999999}>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             Enter Your Delivery Location

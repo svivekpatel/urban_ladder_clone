@@ -9,9 +9,15 @@ const SingleProduct = () => {
   const { ID } = useParams();
 
   React.useEffect(() => {
-    axios.get(`http://localhost:3000/data/${ID}`).then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get(`https://lime-tough-coati.cyclic.app/product/${ID}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      });
   }, [ID]);
 
   return (

@@ -8,9 +8,15 @@ const Wishlist = () => {
   const [reload, setReload] = React.useState(false);
 
   React.useEffect(() => {
-    axios.get("http://localhost:3000/wishlist").then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("https://lime-tough-coati.cyclic.app/wishlist", {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      });
   }, [reload]);
   return (
     <>

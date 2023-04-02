@@ -7,7 +7,7 @@ function PaySummary() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios.get("").then((response) => {
+    axios.get("https://lime-tough-coati.cyclic.app/cart").then((response) => {
       setCartItems(response.data);
     });
   }, []);

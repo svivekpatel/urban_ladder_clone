@@ -3,6 +3,8 @@ import React from "react";
 import Footer from "./Components/UserSide/Footer/Footer";
 import Navbar from "./Components/UserSide/Navbar/Navbar";
 import AllRoutes from "./Routes/AllRoutes";
+import Cart from "./Pages/AddressPage/Cart";
+
 
 
 function App() {
@@ -13,14 +15,10 @@ function App() {
       {/* <Product/> */}
       {adminLogin ? "" : <Navbar setAdminLogin={setAdminLogin} />}
       <AllRoutes />
+      <Cart/>
 
       {adminLogin ? "" : <Footer />}
-      {/* <Navbar /> */}
-      {/* <AllRoutes /> */}
-      {/* <Cart/>
-      <Address/>
-      <Payment/> */}
-      {/* <Footer /> */}
+
     </div >
   );
 }

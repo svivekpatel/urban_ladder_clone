@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Gst from './Gst';
 
-function Summary() {
+function AddressSummary() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -83,4 +83,4 @@ function Summary() {
   )
 }
 
-export default Summary
+export default AddressSummary

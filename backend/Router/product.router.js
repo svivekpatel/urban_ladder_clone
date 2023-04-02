@@ -28,7 +28,7 @@ productRoute.get('/', async (req, res) => {
 
 // adding product to MongoDB
 
-productRoute.post('/add', async (req, res) => {
+productRoute.post('/addproduct', async (req, res) => {
 
 
     try {

@@ -18,6 +18,7 @@ function App() {
       <Cart/>
 
       {adminLogin ? "" : <Footer />}
+
     </div >
   );
 }

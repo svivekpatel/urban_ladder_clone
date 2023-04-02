@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 // import { BiHeart } from "react-icons/bi";
 import { Image } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ image, title, price, description, category }) => {
+const ProductCard = ({ _id, img, title, price, description, category }) => {
   return (
     <Box
       bg="white"
@@ -27,7 +28,10 @@ const ProductCard = ({ image, title, price, description, category }) => {
         </Flex>
       </Box>
       <Box mt={7}>
-        <Image src={image} alt="pic" w="100%" h="250px" />
+        <Link to={`/product/${_id}`}>
+          {" "}
+          <Image src={img} alt="pic" w="100%" h="250px" />
+        </Link>
       </Box>
       <Text textAlign="center">{description}</Text>
       <Text textAlign="center" color="teal">

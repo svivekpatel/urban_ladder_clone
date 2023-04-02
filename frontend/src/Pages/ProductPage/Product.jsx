@@ -24,10 +24,16 @@ const Product = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://fakestoreapi.com/products`).then((res) => {
-      console.log(res.data);
-      setData(res.data);
-    });
+    axios
+      .get(`https://lime-tough-coati.cyclic.app/products`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data);
+      });
   }, []);
 
   return (
@@ -356,7 +362,7 @@ const Product = () => {
       </Box>
       <Grid templateColumns="repeat(3, 1fr)" gap={6} w="80%" m="auto" mt={4}>
         {data.map((item) => (
-          <GridItem key={item.id}>
+          <GridItem key={item._id}>
             <ProductCard {...item} />
           </GridItem>
         ))}

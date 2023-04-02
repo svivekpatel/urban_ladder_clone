@@ -10,9 +10,15 @@ import { Link } from "react-router-dom";
 const SimilarProducts = () => {
   const [data, setData] = React.useState([]);
   const getdata = () => {
-    axios.get(`http://localhost:3000/data`).then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get(`https://lime-tough-coati.cyclic.app/product`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      });
   };
 
   React.useEffect(() => {

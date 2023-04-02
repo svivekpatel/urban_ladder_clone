@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 
 const WishlistWithProducts = ({ data, setReload, reload }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/wishlist/${id}`);
+    await axios.delete(`https://lime-tough-coati.cyclic.app/wishlist/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
     setReload(!reload);
   };
   return (

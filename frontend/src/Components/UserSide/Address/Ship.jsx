@@ -2,12 +2,12 @@
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/input'
 import { Box, Flex, Text } from '@chakra-ui/layout'
-import React from 'react'
 
 import {
     Textarea,
 } from '@chakra-ui/react'
 import Bill from './Bill'
+import { useState } from 'react'
 
 const Ship = () => {
 

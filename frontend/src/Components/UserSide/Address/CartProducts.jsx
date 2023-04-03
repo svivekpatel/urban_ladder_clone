@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Box, Image, Text, Select, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import axios from "axios";
 
-function CartProducts() {
+function CartProducts({reload,setReload}) {
 
 
 
@@ -18,14 +18,16 @@ function CartProducts() {
     useEffect(() => {
         axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
             setCartItems(response.data);
-            console.log(response)
+            
         });
     }, []);
 
-    const handleQuantityChange = (itemIndex, event) => {
+    const handleQuantityChange = (itemIndex, event, totalPrice) => {
         const newCartItems = [...cartItems];
         newCartItems[itemIndex].quantity = event.target.value;
         setCartItems(newCartItems);
+        localStorage.setItem("totalPrice",totalPrice*newCartItems[itemIndex].quantity)
+        setReload(!reload)
     };
 
 
@@ -74,7 +76,7 @@ console.log(cartItems)
                                     <Td>
                                         <Select
                                             value={item.quantity}
-                                            onChange={(event) => handleQuantityChange(index, event)}
+                                            onChange={(event) => handleQuantityChange(index, event, item.price)}
                                         >
                                             {[1, 2, 3, 4, 5].map((quantity) => (
                                                 <option key={quantity} value={quantity}>

@@ -48,7 +48,7 @@ function CartProducts({reload,setReload}) {
     }
 
 
-console.log(cartItems)
+   console.log(cartItems)
     return (
         <Box p={"30px"} border={"1px solid gray"}>
 
@@ -118,18 +118,19 @@ console.log(cartItems)
                     </Flex>
             }
         </Box>
-      ) : (
-        <Flex mt={"20px"} mb={"40px"}>
-          <Text>Your basket is currently empty. .</Text>
-          <Link>
-            <Text as={"u"} color={"#61171d"}>
-              {" "}
-              Continue Shopping.
-            </Text>
-          </Link>
-        </Flex>
-      )}
-    </Box>
+    //  ) 
+    // : (
+    //     <Flex mt={"20px"} mb={"40px"}>
+    //       <Text>Your basket is currently empty. .</Text>
+    //       <Link>
+    //         <Text as={"u"} color={"#61171d"}>
+    //           {" "}
+    //           Continue Shopping.
+    //         </Text>
+    //       </Link>
+    //     </Flex>
+    //   )}
+    // </Box>
   );
 }
 

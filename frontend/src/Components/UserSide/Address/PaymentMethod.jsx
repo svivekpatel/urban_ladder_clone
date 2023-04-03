@@ -7,7 +7,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const PaymentMethod = () => {
-    const userAddress = JSON.parse(localStorage.getItem("user_address")) || ""
+    const userAddress = JSON.parse(localStorage.getItem("shippingAddress")) || ""
     console.log(userAddress)
     return (
 
@@ -41,10 +41,10 @@ const PaymentMethod = () => {
                     <Box>
                         <FormLabel><u>Billing Address:</u></FormLabel>
                         <Box align={"start"}>
-                            <Text>{`${userAddress.first_name || ""} ${userAddress.last_name || ""}`}</Text>
+                            <Text>{`${userAddress.firstName || ""} ${userAddress.lastName || ""}`}</Text>
                             <Text>{userAddress.address || ""}</Text>
-                            <Text>{`${userAddress.city || ""} ${userAddress.pin || ""}`}</Text>
-                            <Text>{userAddress.mobile || ""}</Text>
+                            <Text>{`${userAddress.city || ""} ${userAddress.pinCode || ""}`}</Text>
+                            <Text>{userAddress.mobileNumber || ""}</Text>
 
                         </Box>
                         <Box display={"flex"} justify={"center"} mt={"5px"}>

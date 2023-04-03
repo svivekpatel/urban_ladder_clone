@@ -4,18 +4,16 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function PaySummary() {
+function PaySummary({reload,setReload}) {
   const [cartItems, setCartItems] = useState([]);
+  const [subtotals,setsubtotals] = useState(0)
 
   useEffect(() => {
     axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
       setCartItems(response.data);
     });
-  }, []);
-  let subtotals = 0;
-  for (let i = 0; i < cartItems.length; i++) {
-    subtotals += cartItems[i].price;
-  }
+    setsubtotals(localStorage.getItem("totalPrice")? localStorage.getItem("totalPrice"):cartItems.price)
+  }, [reload]);
   return (
     <Box >
 

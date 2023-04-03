@@ -5,18 +5,16 @@ import axios from 'axios';
 import Gst from './Gst';
 import { Link } from 'react-router-dom';
 
-function AddressSummary() {
+function AddressSummary({reload,setReload}) {
   const [cartItems, setCartItems] = useState([]);
+  const [subtotals,setsubtotals] = useState(0)
 
   useEffect(() => {
     axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
       setCartItems(response.data);
     });
-  }, []);
-  let subtotals = 0;
-  for (let i = 0; i < cartItems.length; i++) {
-    subtotals += cartItems[i].price;
-  }
+    setsubtotals(localStorage.getItem("totalPrice")? localStorage.getItem("totalPrice"):cartItems.price)
+  }, [reload]);
   return (
     <Box >
 

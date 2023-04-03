@@ -16,9 +16,9 @@ function CartProducts() {
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        axios.get("https://lime-tough-coati.cyclic.app/cart").then((response) => {
+        axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
             setCartItems(response.data);
-            console.log(response.data)
+            console.log(response)
         });
     }, []);
 
@@ -37,7 +37,7 @@ function CartProducts() {
     }
 
 
-
+console.log(cartItems)
     return (
         <Box p={"30px"} border={"1px solid gray"}>
 
@@ -65,7 +65,7 @@ function CartProducts() {
                             {cartItems.map((item, index) => (
                                 <Tr key={index}>
                                     <Td display="flex" alignItems="center">
-                                        <Image src={item.image} alt={item.title} w={"100px"} mr={4} />
+                                        <Image src={item.img} alt={item.title} w={"100px"} mr={4} />
                                         <Box>
                                             <Text fontWeight="bold">{item.title}</Text>
                                         </Box>

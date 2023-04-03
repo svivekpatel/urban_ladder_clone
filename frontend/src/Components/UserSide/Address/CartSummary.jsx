@@ -8,7 +8,7 @@ function CartSummary() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios.get("https://lime-tough-coati.cyclic.app/cart").then((response) => {
+    axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
       setCartItems(response.data);
     });
   }, []);

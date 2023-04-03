@@ -167,7 +167,7 @@ const Navbar = ({ setAdminLogin }) => {
           </Text>
           <Text
             cursor={"pointer"}
-            onClick={() => visit("/checkout")}
+            onClick={() => visit("/cart")}
             color="#3e3f42"
           >
             <i class="fa-solid fa-cart-shopping"></i>

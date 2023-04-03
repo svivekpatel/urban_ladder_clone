@@ -9,7 +9,7 @@ function AddressSummary() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios.get("").then((response) => {
+    axios.get("https://lime-tough-coati.cyclic.app/getcart").then((response) => {
       setCartItems(response.data);
     });
   }, []);

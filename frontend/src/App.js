@@ -15,7 +15,6 @@ function App() {
       {/* <Product/> */}
       {adminLogin ? "" : <Navbar setAdminLogin={setAdminLogin} />}
       <AllRoutes />
-      <Cart/>
 
       {adminLogin ? "" : <Footer />}
 

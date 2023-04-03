@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 
 const WishlistWithProducts = ({ data, setReload, reload }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`https://lime-tough-coati.cyclic.app/wishlist/${id}`, {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    });
+    await axios.delete(
+      `https://lime-tough-coati.cyclic.app/wishlist/deletewishlist/${id}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    );
     setReload(!reload);
   };
   return (
@@ -47,7 +50,7 @@ const WishlistWithProducts = ({ data, setReload, reload }) => {
                   textAlign={"center"}
                   p="20px 8px 35px 8px"
                 >
-                  <Link to={`/product/${el.id}`}>
+                  <Link to={`/product/${el.productID}`}>
                     <Image
                       transition="300ms"
                       _hover={{
@@ -72,9 +75,9 @@ const WishlistWithProducts = ({ data, setReload, reload }) => {
                     </Text>
                   </Link>
                   <Flex p={"0px 10px"} justify={"space-between"} align="center">
-                    <Text fontWeight={"500"}> {el.price}</Text>
+                    <Text fontWeight={"500"}>₹ {el.price}</Text>
                     <Button
-                      onClick={() => handleDelete(el.id)}
+                      onClick={() => handleDelete(el._id)}
                       transition="300ms"
                       border={"2px solid #B52B37"}
                       _hover={{

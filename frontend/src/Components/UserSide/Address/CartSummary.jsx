@@ -1,7 +1,8 @@
 import { Button, Image } from '@chakra-ui/react'
-import { Box, Flex, Text, Link } from '@chakra-ui/layout'
+import { Box, Flex, Text} from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function CartSummary() {
   const [cartItems, setCartItems] = useState([]);
@@ -75,7 +76,10 @@ function CartSummary() {
             </Box>
           </Flex>
         </Box>
+        <Link to="/address">
         <Button mt={"20px"} w={"100%"} bg={"#61171d"} color={"white"}>CHECKOUT</Button>
+        </Link>
+        
       </Box>
     </Box>
   )

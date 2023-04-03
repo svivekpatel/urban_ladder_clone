@@ -8,6 +8,9 @@ import Product from "../Pages/ProductPage/Product";
 import Signup from "../Pages/SignupPage/Signup";
 import SingleProduct from "../Pages/SingleProductPage/SingleProduct";
 import Wishlist from "../Pages/WishlistPage/Wishlist";
+import Cart from "../Pages/AddressPage/Cart";
+import Address from "../Pages/AddressPage/Address";
+import Payment from "../Pages/AddressPage/Payment";
 
 const AllRoutes = () => {
   return (
@@ -19,7 +22,9 @@ const AllRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="*" element={<h1>Sorry Not Found</h1>} />
       </Routes>

@@ -17,13 +17,22 @@ const AddToCart = ({ data, bg }) => {
 
   const getWishlistData = async (id) => {
     try {
-      await axios.get(`http://localhost:3000/wishlist`).then((res) => {
-        res.data.forEach((el) => {
-          if (el.id === +id) {
-            setWishlist(true);
-          }
+      await axios
+        .get(`https://lime-tough-coati.cyclic.app/wishlist/`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          res.data.forEach((el) => {
+            if (el.productID === id) {
+              setWishlist(true);
+              return;
+            } else {
+              setWishlist(false);
+            }
+          });
         });
-      });
     } catch (error) {
       console.log(error);
     }
@@ -31,10 +40,17 @@ const AddToCart = ({ data, bg }) => {
 
   React.useEffect(() => {
     getWishlistData(ID);
-  }, [reload]);
+  }, [reload, ID]);
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/wishlist/${id}`);
+    await axios.delete(
+      `https://lime-tough-coati.cyclic.app/wishlist/deletewishlist/${id}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    );
     setWishlist(false);
     toast({
       title: `Product removed from wishlist`,
@@ -47,10 +63,9 @@ const AddToCart = ({ data, bg }) => {
   const handleWishlist = async (id, img, name, price) => {
     await axios
       .post(
-        "https://lime-tough-coati.cyclic.app/wishlist",
+        "https://lime-tough-coati.cyclic.app/wishlist/addtowishlist",
         {
-          id,
-          productId: Date.now(),
+          productID: id,
           img,
           name,
           price,
@@ -72,13 +87,15 @@ const AddToCart = ({ data, bg }) => {
     });
   };
 
-  const handleCart = async (uid) => {
+  const handleCart = async (title, img, price, brand) => {
     await axios
       .post(
-        "https://lime-tough-coati.cyclic.app/cart",
+        "https://lime-tough-coati.cyclic.app/cart/addtocart",
         {
-          id: Date.now(),
-          productId: uid,
+          title,
+          img,
+          price,
+          brand,
         },
         {
           headers: {
@@ -99,8 +116,8 @@ const AddToCart = ({ data, bg }) => {
           <Flex
             onClick={() =>
               wishlist
-                ? handleDelete(data.id)
-                : handleWishlist(data.id, data.img, data.name, data.price)
+                ? handleDelete(data._id)
+                : handleWishlist(data._id, data.img, data.title, data.price)
             }
             cursor={"pointer"}
             gap={"5px"}
@@ -170,17 +187,17 @@ const AddToCart = ({ data, bg }) => {
 
         {/* ---------color */}
 
-        {Object.keys(data).length > 0 && data.name.includes("Chair") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Chair") ? (
           <ColorForChair />
         ) : (
           ""
         )}
-        {Object.keys(data).length > 0 && data.name.includes("Bed") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Bed") ? (
           <ColorForBed />
         ) : (
           ""
         )}
-        {Object.keys(data).length > 0 && data.name.includes("Sofa") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Sofa") ? (
           <ColorForSofa />
         ) : (
           ""
@@ -189,14 +206,14 @@ const AddToCart = ({ data, bg }) => {
         {/* ----------- MRP */}
 
         <Flex pt={"20px"} align={"center"} justify="center" gap={"40px"}>
-          <Flex fontSize={"11px"} opacity="60%" fontWeight="500" gap="5px">
+          {/* <Flex fontSize={"11px"} opacity="60%" fontWeight="500" gap="5px">
             <Text>MRP</Text>{" "}
             <Text textDecor={"line-through"}>{data.strike_price}</Text>
-          </Flex>
+          </Flex> */}
 
           <Flex align={"center"} direction={{ base: "row", md: "column" }}>
             <Text fontWeight={"500"} fontSize="17px">
-              {data.price}
+              ₹ {data.price}
             </Text>
             <Text fontSize={"9px"}>(inclusive of all taxes)</Text>
           </Flex>
@@ -226,7 +243,9 @@ const AddToCart = ({ data, bg }) => {
           letterSpacing={"2px"}
           borderRadius={"0px"}
           color="white"
-          onClick={() => handleCart(data.id)}
+          onClick={() =>
+            handleCart(data.title, data.img, data.price, data.brand)
+          }
           bg={bg}
           _hover={{
             bg: "#b52b37",

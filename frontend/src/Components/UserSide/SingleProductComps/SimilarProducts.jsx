@@ -11,13 +11,17 @@ const SimilarProducts = () => {
   const [data, setData] = React.useState([]);
   const getdata = () => {
     axios
-      .get(`https://lime-tough-coati.cyclic.app/product`, {
+      .get(`https://lime-tough-coati.cyclic.app/products`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((res) => {
         setData(res.data);
+
+        if (data.length > 0) {
+          data.reverse();
+        }
       });
   };
 
@@ -46,7 +50,7 @@ const SimilarProducts = () => {
         responsive={responsive}
       >
         {data?.map((item, index) => (
-          <Link key={index} to={`/product/${item.id}`}>
+          <Link key={index} to={`/product/${item._id}`}>
             <Stack
               onClick={() => handleClick()}
               mb={"50px"}
@@ -64,14 +68,14 @@ const SimilarProducts = () => {
                   fontSize="14px"
                   fontWeight={"500"}
                 >
-                  {item.name}
+                  {item.title}
                 </Text>
 
                 <Flex justify={"center"} fontSize={"14px"} gap={"10px"}>
                   <Text opacity={"60%"} textDecor="line-through">
-                    {item.strike_price}
+                    ₹ {item.price + Math.round(Math.random() * 11000)}
                   </Text>
-                  <Text>{item.price}</Text>
+                  <Text>₹ {item.price}</Text>
                 </Flex>
               </Stack>
             </Stack>

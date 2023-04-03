@@ -14,7 +14,7 @@ const ProductUpperBody = ({ data }) => {
         p={{ base: "10px", md: 0 }}
       >
         <Flex gap="30px" mb={"30px"} direction={{ base: "column", md: "row" }}>
-          <ImageComp bg={bg} data={data} />
+          {data && <ImageComp bg={bg} data={data} />}
           <AddToCart bg={bg} data={data} />
         </Flex>
         <Divider m={"auto"} w={"93%"} />

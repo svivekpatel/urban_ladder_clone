@@ -7,16 +7,17 @@ import { useParams } from "react-router-dom";
 const SingleProduct = () => {
   const [data, setData] = React.useState([]);
   const { ID } = useParams();
-
+  console.log(ID);
   React.useEffect(() => {
     axios
-      .get(`https://lime-tough-coati.cyclic.app/product/${ID}`, {
+      .get(`https://lime-tough-coati.cyclic.app/products/${ID}`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((res) => {
-        setData(res.data);
+        // console.log();
+        setData(res.data.data);
       });
   }, [ID]);
 

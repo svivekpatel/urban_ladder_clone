@@ -21,19 +21,19 @@ const ProductLowerBody = ({ data }) => {
         p={{ base: "10px", md: 0 }}
       >
         <FreeHomeDelivery />
-        {Object.keys(data).length > 0 && data.name.includes("Chair") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Chair") ? (
           <ProductDimensionForChair />
         ) : (
           ""
         )}
 
-        {Object.keys(data).length > 0 && data.name.includes("Sofa") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Sofa") ? (
           <ProductDimensionForSofa />
         ) : (
           ""
         )}
 
-        {Object.keys(data).length > 0 && data.name.includes("Bed") ? (
+        {Object.keys(data).length > 0 && data.title.includes("Bed") ? (
           <ProductDimensionForBed />
         ) : (
           ""

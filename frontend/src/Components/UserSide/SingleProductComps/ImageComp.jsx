@@ -10,14 +10,15 @@ const ImageComp = ({ data, bg }) => {
           whiteSpace={"nowrap"}
           overflow={"hidden"}
           textOverflow={"ellipsis"}
-          fontSize={"21px"}
-          color={"#2F62AE"}
+          fontSize={"27px"}
+          color={"#B52B37"}
+          textDecor={"underline"}
         >
           {" "}
-          {data.name}
+          {data.title}
         </Text>
-        <Stack pb={"20px"} w="95%">
-          <Image src={data.img} />
+        <Stack pb={"20px"} w="75%">
+          <Image maxHeight={"95%"} src={data.img} />
         </Stack>
         <Text fontSize={"14px"} color={"#b52b37"}>
           PRODUCT DETAILS
@@ -39,7 +40,7 @@ const ImageComp = ({ data, bg }) => {
           </Flex>
           <Flex gap={"5px"}>
             <Text className="product-details">● Package Contains:</Text>
-            <Text className="product-details-value">1 {data.category}</Text>
+            <Text className="product-details-value">1 Product</Text>
           </Flex>
         </SimpleGrid>
         <Text className="MoreInfo" fontSize={"14px"} color={"#b52b37"}>

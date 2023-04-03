@@ -1,11 +1,20 @@
-import { Divider, Flex, Link } from '@chakra-ui/layout';
-import React from 'react'
-import {
-    Button,
-} from '@chakra-ui/react'
+import { Divider, Flex, Link } from "@chakra-ui/layout";
+import React from "react";
+import { Button } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
-import { Box, Image, Text, Select, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  Select,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+} from "@chakra-ui/react";
 import axios from "axios";
 
 function CartProducts() {
@@ -107,8 +116,19 @@ console.log(cartItems)
                     </Flex>
             }
         </Box>
-
-    )
+      ) : (
+        <Flex mt={"20px"} mb={"40px"}>
+          <Text>Your basket is currently empty. .</Text>
+          <Link>
+            <Text as={"u"} color={"#61171d"}>
+              {" "}
+              Continue Shopping.
+            </Text>
+          </Link>
+        </Flex>
+      )}
+    </Box>
+  );
 }
 
 export default CartProducts;

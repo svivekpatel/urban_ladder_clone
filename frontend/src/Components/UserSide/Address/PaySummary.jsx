@@ -1,7 +1,8 @@
 import { Button, Image } from '@chakra-ui/react'
-import { Box, Flex, Text, Link } from '@chakra-ui/layout'
+import { Box, Flex, Text } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function PaySummary() {
   const [cartItems, setCartItems] = useState([]);
@@ -62,7 +63,10 @@ function PaySummary() {
           <Text>Booking Amount (Pay Now)</Text>
           <Text>₹{subtotals || 0}</Text>
         </Flex>
-        <Button mt={"20px"} w={"100%"} bg={"#61171d"} color={"white"}>PLACE ORDER</Button>
+        <Link to="/">
+        <Button mt={"20px"} w={"100%"} bg={"#61171d"} color={"white"} onClick={()=>{alert("Order Placed!")}}>PLACE ORDER</Button>
+        </Link>
+        
       </Box>
     </Box>
   )

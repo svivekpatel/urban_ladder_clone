@@ -33,7 +33,7 @@ function CartProducts() {
         const newCartItems = [...cartItems];
         newCartItems.splice(itemIndex, 1);
         setCartItems(newCartItems);
-        axios.delete(`https://lime-tough-coati.cyclic.app/cart/deletecart/${_id}`);
+        axios.delete(`https://lime-tough-coati.cyclic.app/cart/deletecart/${itemId}`);
     }
 
 

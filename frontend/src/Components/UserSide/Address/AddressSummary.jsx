@@ -1,8 +1,9 @@
 import { Button, Image } from '@chakra-ui/react'
-import { Box, Flex, Text, Link } from '@chakra-ui/layout'
+import { Box, Flex, Text } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Gst from './Gst';
+import { Link } from 'react-router-dom';
 
 function AddressSummary() {
   const [cartItems, setCartItems] = useState([]);
@@ -76,7 +77,9 @@ function AddressSummary() {
             </Box>
           </Flex>
         </Box>
+        <Link to="/payment">
         <Button mt={"20px"} w={"100%"} bg={"#61171d"} color={"white"}>SAVE AND CONTINUE</Button>
+        </Link>
       </Box>
       <Gst/>
     </Box>
